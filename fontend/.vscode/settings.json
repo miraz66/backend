@@ -2,5 +2,6 @@
     "git.ignoreLimitWarning": true,
     "editor.fontSize": 25,
     "files.autoSave": "onFocusChange",
-    "editor.fontLigatures": false
+    "editor.fontLigatures": true,
+    "editor.fontFamily": "Cascadia Code"
 }
