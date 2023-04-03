@@ -1,19 +1,19 @@
-import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+// import { Fragment } from "react";  `
+import { Disclosure} from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
 
 const navigation = [
   { name: "Dashboard", href: "/" },
-  { name: "Team", href: "/team" },
+  { name: "Customers", href: "/customers" },
   { name: "Projects", href: "/project" },
   { name: "About", href: "/about" },
   { name: "Dictionary", href: "/dictionary" },
 ];
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
-}
+// function classNames(...classes) {
+//   return classes.filter(Boolean).join(" ");
+// }
 
 export default function Header(props) {
   return (

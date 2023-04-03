@@ -1,7 +1,15 @@
 {
-    "git.ignoreLimitWarning": true,
-    "editor.fontSize": 25,
-    "files.autoSave": "onFocusChange",
-    "editor.fontLigatures": true,
-    "editor.fontFamily": "Cascadia Code"
+  "git.ignoreLimitWarning": true,
+  "editor.fontSize": 25,
+  "files.autoSave": "onFocusChange",
+  "editor.fontLigatures": true,
+  "editor.fontFamily": "Cascadia Code",
+  "prettier.requireConfig": false,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.letterSpacing": 0,
+  "editor.tabSize": 4,
+  "editor.useTabStops": true,
+  "editor.tabCompletion": "off",
+  "prettier.useTabs": true
 }
