@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,6 +27,12 @@ SECRET_KEY = 'django-insecure-wbks3_1**hw-+$u!jf4fzl5q55&na)gymi2z9q6j)-k%6tp202
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
+    'ROTATE_REFRESH_TOKENS': True,
+}
 
 
 # Application definition
@@ -54,6 +61,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication',)
+}
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000"
 ]
@@ -77,7 +88,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'customers.wsgi.application'
-
 
 
 # Database

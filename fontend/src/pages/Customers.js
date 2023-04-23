@@ -1,33 +1,86 @@
-import React, { useEffect, useState } from "react";
-import { json, Link } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import AddCustomer from "../Components/AddCustomer";
 import { baseUrl } from "../Components/Shared";
+// import { LoginContext } from "../App";
+import UseFatch from "../Hooks/UseFatch";
 
 function Customers() {
-	const [customers, setCustomers] = useState();
-
 	const [show, setShow] = useState(false);
+	// const [loggedIn, setLoggedIn] = useContext(LoginContext);
+	//const [customers, setCustomers] = useState();
+	// const navigate = useNavigate();
+	// const location = useLocation();
+
 	function toggleShow() {
 		setShow(!show);
 	}
 
+	const url = baseUrl + "api/customers/";
+
+	const {
+		request,
+		appendData,
+		data: { customers } = {},
+		errorStatus,
+	} = UseFatch(url, {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: "Bearer " + localStorage.getItem("access"), //Bearar gap is importent
+		},
+	});
+
 	useEffect(() => {
+		request();
+	}, []);
+
+	useEffect(() => {
+		console.log(customers, "Error satatus: ", errorStatus);
+	});
+
+	/*useEffect(() => {
 		const url = baseUrl + "api/customers/";
 
-		fetch(url)
-			.then((response) => response.json())
+		fetch(url, {
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + localStorage.getItem("access"), //Bearar gap is importent
+			},
+		})
+			.then((response) => {
+				if (response.status === 401) {
+					setLoggedIn(false);
+					navigate("/login", {
+						state: { previousUrl: location.pathname },
+					});
+				}
+				return response.json();
+			})
 			.then((data) => {
 				setCustomers(data.customers);
 			});
 	}, []);
 
+	*/
+
 	function newCustomer(name, industry) {
-		const data = { name: name, industry: industry };
+		appendData({ name: name, industry: industry });
+
+		if (!errorStatus) {
+			toggleShow();
+		}
+
+		//------------------------------------------------------//
+		/*const data = { name: name, industry: industry };
 		const url = baseUrl + "api/customers/";
 
 		fetch(url, {
 			method: "POST",
-			headers: { "Content-Type": "application/json" },
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + localStorage.getItem("access"), //Bearar gap is importent
+			},
 			body: JSON.stringify(data),
 		})
 			.then((response) => {
@@ -46,7 +99,7 @@ function Customers() {
 			})
 			.catch((e) => {
 				console.log(e);
-			});
+			});*/
 	}
 
 	return (
@@ -56,8 +109,13 @@ function Customers() {
 				{customers
 					? customers.map((customer) => {
 							return (
-								<li key={customer.id}>
-									<Link to={"/customers/" + customer.id}>{customer.name}</Link>
+								<li key={customer.id} className="my-3">
+									<Link
+										className="no-underline bg-gray-500 text-white px-6 py-2 rounded hover:bg-gray-400"
+										to={"/customers/" + customer.id}
+									>
+										{customer.name}
+									</Link>
 								</li>
 							);
 					  })
@@ -68,6 +126,7 @@ function Customers() {
 				newCustomer={newCustomer}
 				show={show}
 				toggleShow={toggleShow}
+				errorStatus={errorStatus}
 			/>
 		</div>
 	);
