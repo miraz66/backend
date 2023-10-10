@@ -27,8 +27,7 @@ export default async function Blog() {
                 <p>{id}</p>
                 <p className="pb-20">{user.bio}</p>
                 <div>hello</div>
-                <div>hello</div>
-                <div>hello</div>
+                <div>hello</div>d<div>hello</div>d<div>hello</div>
               </div>
             ))
           : null}
