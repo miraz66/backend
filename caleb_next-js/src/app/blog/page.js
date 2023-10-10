@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 
 export default async function Blog() {
@@ -6,15 +7,25 @@ export default async function Blog() {
   );
 
   const data = await res.json();
-  console.log(data.id);
+
+  console.log(data);
+
+  // console.log(
+  //   data
+  //     ? data.map(({ urls }) => {
+  //         console.log(urls.raw);
+  //       })
+  //     : null
+  // );
 
   return (
     <>
       <div>
         {data
-          ? data.map(({ id }) => (
+          ? data.map(({ id, user }) => (
               <div key={id}>
                 <p>{id}</p>
+                <p className="pb-20">{user.bio}</p>
               </div>
             ))
           : null}
