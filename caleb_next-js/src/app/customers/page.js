@@ -12,6 +12,8 @@ const Castomers = () => {
       </h1>
 
       <div>hello </div>
+      <div>hello </div>
+      <div>hello </div>
     </>
   );
 };
