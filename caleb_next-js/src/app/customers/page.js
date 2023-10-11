@@ -10,6 +10,8 @@ const Castomers = () => {
           return <p key={id}>{name}</p>;
         })}
       </h1>
+
+      <div>hello </div>
     </>
   );
 };
